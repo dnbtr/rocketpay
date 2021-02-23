@@ -17,3 +17,36 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+### Comandos
+
+Iniciando projeto
+`$ mix phx.new rocketpay --no-webpack --no-html`
+
+`$ mix ecto.setup`
+  - Conecta com DB e realiza migrations
+
+mix.exs - Inserir Credo como dependência
+  - `{:credo, "~> 1.5", only: [:dev, :test], runtime: false}`
+
+`$ mix credo gen.config`
+  - {Credo.Check.Readability.ModuleDoc, []}, Para `false`;
+    - Para não gerar documentação automática
+
+Iniciar o servidor
+`mix phx.server`
+  - Ir para localhost:4000/dashboard
+    - Dashboard de monitoramento atualiza automaticamente
+
+Definir rota no **router.ex** e criar Controller
+
+### Benchmarking
+
+The first GET request:
+```
+[debug] Processing with RocketpayWeb.WelcomeController.index/2
+  Parameters: %{}
+  Pipelines: [:api]
+[info] Sent 200 in 963µs
+[info] GET /api
+```
