@@ -40,6 +40,26 @@ Iniciar o servidor
 
 Definir rota no **router.ex** e criar Controller
 
+Testando funções (IEX)
+`$ iex -S mix` para ter acesso às funções definidas no projeto
+`iex(1)> Rocketpay.Numbers.sum_from_file("numbers")`
+devolve a tupla `{:ok, 1,2,3,4,8,9,10}` ou `{:error, :enoent}` se arquivo não existir
+`iex(1)> h [NOME - FUNÇÃO` traz a documentação (como o "man" do bash)
+
+**Pattern matching**
+
+> [1,2,3,4]
+> [a,b,c,d] = [1,2,3,4] 
+> [a,b] = [1,2,3,4] <!-- Dá erro -->
+
+Ver também função sum_from_file para ver mais pattern matching
+
+**Pipe operator**
+Primeiro argumento é implícito e não precisa ser declarado ao chamar a função
+
+**Retorno de função**
+É implícito também. Colocar apenas o nome da variável no fim da função
+
 ### Benchmarking
 
 The first GET request:
