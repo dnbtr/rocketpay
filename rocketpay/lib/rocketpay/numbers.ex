@@ -20,7 +20,7 @@ defmodule Rocketpay.Numbers do
     result =
       result
       |> String.split(",")
-      |> Enum.map(fn number -> String.to_integer(number) end)
+      |> Stream.map(fn number -> String.to_integer(number) end)
       |> Enum.sum()
 
     # Sem pipe operator
@@ -33,5 +33,5 @@ defmodule Rocketpay.Numbers do
 
   # O reason não importa para este match
   # Testar no IEX > Rocketpay.Numbers.sum_from_file("aaa")
-  defp handle_file({:error, _reason}), do: {:error, "Invalid file"}
+  defp handle_file({:error, _reason}), do: {:error, %{message: "Invalid File"}}
 end

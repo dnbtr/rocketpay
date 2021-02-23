@@ -60,6 +60,13 @@ Primeiro argumento é implícito e não precisa ser declarado ao chamar a funç�
 **Retorno de função**
 É implícito também. Colocar apenas o nome da variável no fim da função
 
+**IO.inspect()**
+É semelhante ao console.log()
+
+**Enum x Stream**
+Stream é um lazy operator, só é executado quando o resultado é necessário
+É possível concatenar várias operações e depois concatenar em um Enum
+
 ### Benchmarking
 
 The first GET request:
