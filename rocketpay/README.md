@@ -94,6 +94,13 @@ Testando
   - Inserindo no banco
     `> params |> User.changeset() |> Rocketpay.Repo.insert(changeset)`
 
+**Fachada**
+Criado no rocketpay.ex, para chamar Rocketpay.create_user diretamente (ao invés de Rocketpay.Users.Create)
+  - Definindo parâmetros
+    `> params = %{name: "teste", password: "123123", email: "email@email.com", nickname: "teste", age: 99}`
+  - Gravando no banco
+    `> Rocketpay.create_user(params)`
+
 ### Benchmarking
 
 The first GET request:
