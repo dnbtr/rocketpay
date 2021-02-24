@@ -82,10 +82,17 @@ config :rocketpay, Rocketpay.Repo,
 ```
 **Changeset**
 Recebe params, faz o cast e mapeia para os tipos da tabela
+Repo lida automaticamente com retorno do Changeset (insere no banco ou mostra erros de validação )
 
 Testando
 `$ iex -S mix`
-`> Rocketpay.User.changeset(%{name: "teste", password_hash: "123123", email: "email@email.com", nickname: "teste", age: 99})`
+`> Rocketpay.User.changeset(%{name: "teste", password: "123123", email: "email@email.com", nickname: "teste", age: 99})`
+
+  - Definindo parâmetros
+    `> params = %{name: "teste", password: "123123", email: "email@email.com", nickname: "teste", age: 99}`
+
+  - Inserindo no banco
+    `> params |> User.changeset() |> Rocketpay.Repo.insert(changeset)`
 
 ### Benchmarking
 
