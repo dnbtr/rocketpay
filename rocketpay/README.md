@@ -17,14 +17,18 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+  * [Elixir docs](https://elixir-lang.org/getting-started/basic-types.html)
 
 ### Comandos
 
 Iniciando projeto
 `$ mix phx.new rocketpay --no-webpack --no-html`
 
-`$ mix ecto.setup`
-  - Conecta com DB e realiza migrations
+`$ mix ecto.setup` - Conecta com DB e realiza migrations
+`$ mix ecto.create` - Cria banco de dados
+`$ mix ecto.gen.migration [NOME-TABELA]` - Criar migration
+`$ mix ecto.migrate` - Rodar migrations
+`$ mix ecto.drop` - Dropa o schema? O banco inteiro?
 
 mix.exs - Inserir Credo como dependência
   - `{:credo, "~> 1.5", only: [:dev, :test], runtime: false}`
@@ -66,6 +70,22 @@ Primeiro argumento é implícito e não precisa ser declarado ao chamar a funç�
 **Enum x Stream**
 Stream é um lazy operator, só é executado quando o resultado é necessário
 É possível concatenar várias operações e depois concatenar em um Enum
+
+**Schemas**
+Ao contrário de Models, tem apenas mapeamento de dados, não tem nenhum comportamento
+
+Adicionar essa config no ./config/config.exs para setar UUID como chaves do banco
+```elixir
+config :rocketpay, Rocketpay.Repo,
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id],
+```
+**Changeset**
+Recebe params, faz o cast e mapeia para os tipos da tabela
+
+Testando
+`$ iex -S mix`
+`> Rocketpay.User.changeset(%{name: "teste", password_hash: "123123", email: "email@email.com", nickname: "teste", age: 99})`
 
 ### Benchmarking
 
