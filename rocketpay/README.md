@@ -21,6 +21,9 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ### Comandos
 
+Documentação
+[Hex Docs](https://hexdocs.pm/)
+
 Iniciando projeto
 `$ mix phx.new rocketpay --no-webpack --no-html`
 
@@ -64,7 +67,7 @@ Primeiro argumento é implícito e não precisa ser declarado ao chamar a funç�
 **Retorno de função**
 É implícito também. Colocar apenas o nome da variável no fim da função
 
-**IO.inspect()**
+**IO.inspect(), IO.puts()**
 É semelhante ao console.log()
 
 **Enum x Stream**
@@ -84,6 +87,13 @@ config :rocketpay, Rocketpay.Repo,
 Recebe params, faz o cast e mapeia para os tipos da tabela
 Repo lida automaticamente com retorno do Changeset (insere no banco ou mostra erros de validação )
 
+**Tratativa de erro**
+Foi melhorada (para casos de bad request)
+Ver error_view e função *translate_errors* (tirada do próprio site do Phoenix)
+
+**Fallback Controller**
+É o controller que tenta lidar com qualquer erro não tratado
+
 Testando
 `$ iex -S mix`
 `> Rocketpay.User.changeset(%{name: "teste", password: "123123", email: "email@email.com", nickname: "teste", age: 99})`
@@ -94,7 +104,7 @@ Testando
   - Inserindo no banco
     `> params |> User.changeset() |> Rocketpay.Repo.insert(changeset)`
 
-**Fachada**
+**Fachada (Facade?)**
 Criado no rocketpay.ex, para chamar Rocketpay.create_user diretamente (ao invés de Rocketpay.Users.Create)
   - Definindo parâmetros
     `> params = %{name: "teste", password: "123123", email: "email@email.com", nickname: "teste", age: 99}`
