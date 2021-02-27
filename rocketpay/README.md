@@ -87,6 +87,31 @@ config :rocketpay, Rocketpay.Repo,
 Recebe params, faz o cast e mapeia para os tipos da tabela
 Repo lida automaticamente com retorno do Changeset (insere no banco ou mostra erros de validação )
 
+- Exemplo de changeset de Update (que não começa com struct vazia)
+```elixir
+def changeset(struct \\ %__MODULE__{}, params) do
+  struct
+  |> cast(params, @required_params)
+  |> validate_required(@required_params)
+  |> check_constraint(:balance, name: :balance_must_be_positive_or_zero)
+end
+```
+- Exemplo de changeset de criação de usuário (parte de struct vazia)
+```elixir
+  def changeset(params) do
+    # cria struct vazia, insere dados e valida
+    %__MODULE__{}
+    |> cast(params, @required_params)
+    |> validate_required(@required_params)
+    |> validate_length(:password, min: 6)
+    |> validate_number(:age, greater_than_or_equal_to: 18)
+    |> validate_format(:email, ~r/@/)
+    |> unique_constraint([:email])
+    |> unique_constraint([:nickname])
+    |> put_password_hash()
+  end
+```
+
 **Tratativa de erro**
 Foi melhorada (para casos de bad request)
 Ver error_view e função *translate_errors* (tirada do próprio site do Phoenix)
@@ -124,6 +149,7 @@ Para carregar a conta que foi criada em um usuário
 
 **Ecto.Multi**
 Para fazer transações multiplas no banco (no caso, para criar conta de usuário + account)
+Ver arquivo *create.ex*
 
 ### Benchmarking
 
