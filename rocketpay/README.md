@@ -115,6 +115,15 @@ Criado no rocketpay.ex, para chamar Rocketpay.create_user diretamente (ao invés
 Ideal para ser usado em controllers, já que não é preciso programar rotas para tratar erro
   - Qualquer erro é devolvido para a função que chama, e então é tratado pelo Fallback controller
 
+**Relacionamento entre tabelas**
+Depois de criada a tabela de accounts:
+`> params = ${user_id: "[ID AQUI]", balance: "0.00"}`
+`> Rocketpay.Account.changeset() |> Rocketpay.Repo.insert()`
+Para carregar a conta que foi criada em um usuário
+`> Rocketpay.Repo.all(Rocketpay.User) |> Rocketpay.Repo.preload(:account)`
+
+**Ecto.Multi**
+Para fazer transações multiplas no banco (no caso, para criar conta de usuário + account)
 
 ### Benchmarking
 
