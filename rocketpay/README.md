@@ -19,7 +19,7 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Source: https://github.com/phoenixframework/phoenix
   * [Elixir docs](https://elixir-lang.org/getting-started/basic-types.html)
 
-### Comandos
+### Anotações de aula (tudo caótico por hora)
 
 Documentação
 [Hex Docs](https://hexdocs.pm/)
@@ -110,6 +110,11 @@ Criado no rocketpay.ex, para chamar Rocketpay.create_user diretamente (ao invés
     `> params = %{name: "teste", password: "123123", email: "email@email.com", nickname: "teste", age: 99}`
   - Gravando no banco
     `> Rocketpay.create_user(params)`
+
+**With**
+Ideal para ser usado em controllers, já que não é preciso programar rotas para tratar erro
+  - Qualquer erro é devolvido para a função que chama, e então é tratado pelo Fallback controller
+
 
 ### Benchmarking
 

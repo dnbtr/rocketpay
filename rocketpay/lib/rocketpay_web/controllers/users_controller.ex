@@ -6,18 +6,17 @@ defmodule RocketpayWeb.UsersController do
   # Definindo o controller de fallback
   action_fallback RocketpayWeb.FallbackController
 
+  # Se Rocketpay.create_user(params) dá erro,
+  # é retornado erro para função que chamou a create,
+  # e então cai no fallback controller
+
   def create(conn, params) do
-    params
-    |> Rocketpay.create_user()
-    |> handle_response(conn)
+    with {:ok, %User{} = user} <- Rocketpay.create_user(params) do
+      # Poderia ter outros casos de validação aqui
+      # se der erro em qualquer uma, devolve o erro para quem chamou
+      conn
+      |> put_status(:created)
+      |> render("create.json", user: user)
+    end
   end
-
-  defp handle_response({:ok, %User{} = user}, conn) do
-    conn
-    |> put_status(:created)
-    |> render("create.json", user: user)
-  end
-
-  defp handle_response({:error, _result} = error, _conn), do: error
-
 end
